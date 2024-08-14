@@ -69,4 +69,3 @@ print(f'Earth West colors = {color_values_earthW} \n')
 color_pie(mars_pix, 'Mars')
 color_pie(earthE_pix, 'Earth East')
 color_pie(earthW_pix, 'Earth West')
-
