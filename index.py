@@ -33,6 +33,23 @@ def pixelate_image(image, target_matrix, viz_matrix):
 
 mars = pixelate_image(mrs, (3, 3), (300, 300))
 
-plt.imshow(mars)
-plt.axis('off')
-plt.show()
+def color_pie(image, title):
+    """Average an image's RGB channels and plot the results as a pie chart."""
+    r, g, b = cv2.split(image)
+    color_aves = []
+  
+    for array in (r, g, b):
+        color_aves.append(np.average(array))
+
+    labels = 'Red', 'Green', 'Blue'
+    colors = ['red', 'green', 'blue'] 
+    fig, ax = plt.subplots(figsize=(3.5, 3.3)) # size in inches
+    _, _, autotexts = ax.pie(color_aves,
+                            labels=labels,
+                            autopct='%1.1f%%',
+                            colors=colors)
+    for autotext in autotexts:
+        autotext.set_color('white')
+    plt.title(f'{title}\n')
+
+    plt.show()
