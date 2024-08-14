@@ -14,6 +14,8 @@ def load_image(url):
     return cv2.cvtColor(img_ini, cv2.COLOR_BGR2RGB)
 
 mrs = load_image(MARS)
+earthE = load_image(EARTH_EAST)
+earthW = load_image(EARTH_WEST)
 
 def pixelate_image(image, target_matrix, viz_matrix):
     """
@@ -31,7 +33,9 @@ def pixelate_image(image, target_matrix, viz_matrix):
     pixelated = cv2.resize(image, target_matrix, interpolation=cv2.INTER_AREA)
     return cv2.resize(pixelated, viz_matrix, interpolation=cv2.INTER_NEAREST)
 
-mars = pixelate_image(mrs, (3, 3), (300, 300))
+mars_pix = pixelate_image(mrs, (3, 3), (300, 300))
+earthE_pix = pixelate_image(earthE, (3, 3), (300, 300))
+earthW_pix = pixelate_image(earthW, (3, 3), (300, 300))
 
 def color_pie(image, title):
     """Average an image's RGB channels and plot the results as a pie chart."""
@@ -53,3 +57,16 @@ def color_pie(image, title):
     plt.title(f'{title}\n')
 
     plt.show()
+
+color_values_mars = mars_pix[150, 150]
+color_values_earthE = earthE_pix[150, 150]
+color_values_earthW = earthW_pix[150, 150]
+
+print(f'Mars colors = {color_values_mars} \n')
+print(f'Earth East colors = {color_values_earthE} \n')
+print(f'Earth West colors = {color_values_earthW} \n')
+
+color_pie(mars_pix, 'Mars')
+color_pie(earthE_pix, 'Earth East')
+color_pie(earthW_pix, 'Earth West')
+
